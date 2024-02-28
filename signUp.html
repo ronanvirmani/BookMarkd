@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+     <style>
+        body {
+            font-family: 'Lora', serif; /* Use Lora font */
+            background-image: url('static/middleLibrary.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Make body take full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+        .login-box {
+            background-color: white; /* Background color for login box */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Slight shadow */
+            text-align: center; /* Center text inside the box */
+            width: 300px; /* Set a fixed width */
+        }
+        input[type="text"], input[type="password"] {
+            margin: 10px 0; /* Add some space around inputs */
+            padding: 10px;
+            width: calc(100% - 22px); /* Full width inside the box */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px; /* Rounded corners for input fields */
+        }
+        input[type="submit"] {
+            font-family: 'Lora', serif; /* Explicitly set Lora font */
+            padding: 10px 20px;
+            background-color: #420808;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #550a0a;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Sign Up</h2>
+        <form>
+            <div>
+                <input type="text" placeholder="Username" name="username" required>
+            </div>
+            <div>
+                <input type="password" placeholder="Password" name="password" required>
+            </div>
+            <div>
+                <input type="submit" value="Sign Up">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
