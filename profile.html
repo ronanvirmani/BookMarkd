@@ -19,6 +19,15 @@
         .nav-link {
             color: #fff;
         }
+        .header-pfp{
+            width: 50px; /* Adjust the width as needed */
+            height: 50px; /* Adjust the height as needed */
+            border-radius: 50%; /* Creates a circle shape */
+            object-fit: cover; /* Ensures the image covers the area without losing its aspect ratio */
+            margin-right: 15px; /* Adds some space between the image and the next element */
+            margin-left: 15px;
+                    
+        }
         .profile-header-container {
             margin-top: 30px;
         }
@@ -46,6 +55,9 @@
             padding: 5px 15px;
             color: #fff;
             margin: 5px;
+        }
+        .customHr{        
+
         }
         .list-header {
             padding: 20px 0;
@@ -83,6 +95,9 @@
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
             <ul class="navbar-nav">
+                <li>
+                    <img src="static/gojo.jpg" alt="PFP" class="header-pfp" />
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">GOJOS</a>
                 </li>
@@ -111,15 +126,17 @@
 
         <div class="row mt-4">
             <div class="col">
-                <div class="d-flex flex-wrap">
-                    <p>Top Tags:</p>
+                <div class="d-flex align-items-center flex-wrap">
+                    <p class="mb-0 me-2">Top Tags:</p>
                     <span class="genre-badge">Fiction</span>
-                    <span class="genre-badge">LOTRe</span>
+                    <span class="genre-badge">LOTR</span>
                     <span class="genre-badge">Harry Potter Hater</pan>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <div class="container mt-4">
         <h2 class="list-header">Favorite Books</h2>
@@ -139,6 +156,8 @@
             </div>
         </div>
 
+        <hr class = "customHr">
+
         <h2 class="list-header">Recent Activity</h2>
         <div class="row">
             <div class="col">
@@ -155,6 +174,8 @@
                 <img src="https://placehold.co/200x300" alt="Placeholder image for favorite book" class="mb-4">
             </div>
         </div>
+
+        <hr class = "customHr">
 
         <h2 class="list-header">Lists</h2>
         <div class="row">
@@ -176,7 +197,7 @@
 
     <footer class="footer">
         <div class="container text-center">
-            <p>Book review platform © 2024</p>
+            <p>BookMarkd© 2024</p>
         </div>
     </footer>
 
