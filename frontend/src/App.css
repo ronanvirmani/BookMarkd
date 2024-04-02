@@ -36,3 +36,76 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #F5F5DC;
+  font-family: "Lora", serif;
+}
+
+.bookshelf-image {
+  position: relative;
+  height: 30vh;
+  background-image: url('https://images.unsplash.com/photo-1577985051167-0d49eec21977?q=80&w=2978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(245, 245, 220, 0.7); /* Adjust the opacity here */
+}
+
+.jumbotron {
+  position: relative; /* Ensure z-index works */
+  z-index: 1; /* Ensure the content is above the overlay */
+}
+
+.btn-custom {
+  background-color: #420808; /* Set your custom background color */
+  border-color: #420808; /* Set your custom border color */
+  color: #ffffff; /* Set your custom text color */
+}
+
+.btn-custom:hover {
+  background-color: #420808; /* Change color on hover */
+  border-color: #420808; /* Change border color on hover */
+  color: #333333; /* Change text color on hover */
+}
+
+.card-custom {
+  background-color: #808000; /* Set your custom background color */
+  border-color: #808000; /* Set your custom border color */
+  color: #ffffff; /* Set your custom text color */
+}
+
+.card-custom:hover {
+  background-color: #808000; /* Change color on hover */
+  border-color: #808000; /* Change border color on hover */
+  color: #333333; /* Change text color on hover */
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #333333; /* Set the color to white or any other color you prefer */
+}
+
+.navbar .navbar-brand {
+  color: #333333;
+}
+
+.grey-color {
+  color: #333333;
+}
+
+.card-book {
+  background-color: transparent; /* Set your custom background color */
+  border-color: transparent; /* Set your custom border color */
+  border-radius: 2%; /* Add rounded corners */
+}
+
+.img-book {
+  max-width: 100%; /* Ensure image does not exceed its container */
+  border-radius: 2%; /* Add rounded corners */
+}
