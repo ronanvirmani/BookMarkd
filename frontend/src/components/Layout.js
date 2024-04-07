@@ -1,15 +1,25 @@
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Layout = () => {
     return (
         <>
-            {/*TODO: change to a nice looking navbar*/}
-            <ul>
-                <li><Link to="/">HomePage</Link></li>
-                <li><Link to="/profile">Profile Page</Link></li>
-                <li><Link to="/annotations">Annotations</Link></li>
-            </ul>
-
+            <Navbar expand="lg" className="bg-body-tertiary">
+                <Container>
+                    <Navbar.Brand href="/">BookMarkd</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/profile">Profile</Nav.Link>
+                            <Nav.Link href="/annotations">Annotations</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
 
             <main>
                 <Outlet />
