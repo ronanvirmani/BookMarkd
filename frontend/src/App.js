@@ -6,6 +6,9 @@ import Layout from "./components/Layout";
 import Annotations from "./pages/Annotations";
 
 function App() {
+    // API key - needs to be moved somewhere
+    const key = "AIzaSyDVQk5ZQq13AmgRi4YXyhTJg8yo7tOsYNc";
+
   return (
       <BrowserRouter>
           <Routes>
