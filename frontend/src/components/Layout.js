@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 const Layout = () => {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className="bg-body-primary">
                 <Container>
                     <Navbar.Brand href="/">BookMarkd</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
