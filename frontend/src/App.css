@@ -46,12 +46,6 @@ body {
   color: #ffffff; /* Set your custom text color */
 }
 
-.card-custom:hover {
-  background-color: #808000; /* Change color on hover */
-  border-color: #808000; /* Change border color on hover */
-  color: #333333; /* Change text color on hover */
-}
-
 .navbar .navbar-nav .nav-link {
   color: #333333; /* Set the color to white or any other color you prefer */
 }
