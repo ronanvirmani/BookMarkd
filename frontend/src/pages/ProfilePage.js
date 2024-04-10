@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import ProfileHeader from '../components/ProfileHeader';
 import BookList from '../components/BookList';
@@ -9,20 +9,22 @@ import TopTags from '../components/TopTags'; // Make sure to import the TopTags 
 function ProfilePage() {
   const profilePicUrl = 'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg';
   
-  // Example book data
   const favoriteBooks = [
     { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 1" },
     { imageUrl: "https://m.media-amazon.com/images/I/817Xh+bqwOL._AC_UF1000,1000_QL80_.jpg", altText: "Dune 2" },
     { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 3" },
-    // Add more books as needed
   ];
   
   const recentBooks = [
     { imageUrl: "https://placehold.co/200x300", altText: "Recent Book 1" },
-    // Add more books as needed
   ];
 
-  const tags = ["Fiction", "LOTR", "Harry Potter Hater"]; // Example tags
+  const tags = ["Fiction", "LOTR", "Harry Potter Hater"];
+
+  // Use useEffect to set the document title
+  useEffect(() => {
+    document.title = "Profile Page";
+  }, []); // The empty array means this effect runs once when the component mounts
 
   return (
     <div>
@@ -31,10 +33,10 @@ function ProfilePage() {
       <TopTags tags={tags} />
       <BookList title="Favorite Books" books={favoriteBooks} />
       <BookList title="Recent Activity" books={recentBooks} />
-
       <Footer />
     </div>
   );
 }
 
 export default ProfilePage;
+
