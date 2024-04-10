@@ -1,11 +1,40 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
+import ProfileHeader from '../components/ProfileHeader';
+import BookList from '../components/BookList';
+import Footer from '../components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TopTags from '../components/TopTags'; // Make sure to import the TopTags component
 
 function ProfilePage() {
-    return (
-        <div>
-            <h2>BookMarkd Profile Page</h2>
-        </div>
-    );
+  const profilePicUrl = 'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg';
+  
+  // Example book data
+  const favoriteBooks = [
+    { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 1" },
+    { imageUrl: "https://m.media-amazon.com/images/I/817Xh+bqwOL._AC_UF1000,1000_QL80_.jpg", altText: "Dune 2" },
+    { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 3" },
+    // Add more books as needed
+  ];
+  
+  const recentBooks = [
+    { imageUrl: "https://placehold.co/200x300", altText: "Recent Book 1" },
+    // Add more books as needed
+  ];
+
+  const tags = ["Fiction", "LOTR", "Harry Potter Hater"]; // Example tags
+
+  return (
+    <div>
+      <Navbar />
+      <ProfileHeader profilePicUrl={profilePicUrl}/>
+      <TopTags tags={tags} />
+      <BookList title="Favorite Books" books={favoriteBooks} />
+      <BookList title="Recent Activity" books={recentBooks} />
+
+      <Footer />
+    </div>
+  );
 }
 
 export default ProfilePage;
