@@ -32,7 +32,7 @@ function ProfilePage() {
       <ProfileHeader profilePicUrl={profilePicUrl}/>
       <TopTags tags={tags} />
       <BookList title="Favorite Books" books={favoriteBooks} />
-      <BookList title="Recent Activity" books={recentBooks} />
+      <BookList title="Recent Annotations" books={recentBooks} />
       <Footer />
     </div>
   );
