@@ -14,6 +14,7 @@ import Navbar from "./components/navbar";
 import Footer from './components/footer';
 import HomePage from './pages/HomePage';
 import Loginfail from './pages/Loginfail';
+import SearchPage from './pages/SearchPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/annotations" element={<Annotations />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

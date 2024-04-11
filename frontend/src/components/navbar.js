@@ -27,6 +27,9 @@ export default function Navbar() {
                         <Link to="/annotations" className="">
                         Annotations
                         </Link>
+                        <Link to="/search" className="">
+                            Search
+                        </Link>
                         <button onClick={handleLogout} className="">
                         Logout
                         </button>
