@@ -14,6 +14,7 @@ import Navbar from "./components/navbar";
 import Footer from './components/footer';
 import HomePage from './pages/HomePage';
 import Loginfail from './pages/Loginfail';
+import Settings from './pages/Settings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,7 @@ root.render(
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/annotations" element={<Annotations />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
