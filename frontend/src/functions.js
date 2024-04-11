@@ -20,3 +20,18 @@ export async function getUser(supabase, user, setUser) {
       return null;
     }
   }
+
+  export async function getProfileInfo(
+    supabase,
+    user,
+    setUser,
+    
+  ) {
+    let usr = await getUser(supabase, user, setUser);
+  
+    if (usr) {
+      return true;
+    }
+  
+    return false;
+  }
