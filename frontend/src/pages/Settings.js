@@ -13,28 +13,22 @@ function Settings() {
                     <Col md={3} className="pt-0">
                         <Nav variant="pills" className="flex-column account-settings-links">
                             <Nav.Item>
-                                <Nav.Link href="#account-general">General</Nav.Link>
+                                <Nav.Link href="#general">General</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="#account-change-password">Change password</Nav.Link>
+                                <Nav.Link href="#change-password">Change password</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="#account-info">Info</Nav.Link>
+                                <Nav.Link href="#info">Info</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="#account-social-links">Social links</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="#account-connections">Connections</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="#account-notifications">Notifications</Nav.Link>
+                                <Nav.Link href="#notifications">Notifications</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Col>
                     <Col md={9}>
                         <Tab.Content>
-                            <Tab.Pane eventKey="#account-general">
+                            <Tab.Pane eventKey="#general">
                                 <hr className="border-light m-0" />
 
                                 <div className="card-body">
@@ -49,14 +43,24 @@ function Settings() {
                                     <Form.Group>
                                         <Form.Label>E-mail</Form.Label>
                                         <Form.Control type="text" defaultValue="test@example.com" />
-                                        <div className="alert alert-warning mt-3">
-                                            Your email is not confirmed. Please check your inbox.<br />
-                                            <a href="javascript:void(0)">Resend confirmation</a>
-                                        </div>
+                                    </Form.Group>
+                                </div>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="#change-password">
+                                <hr className="border-light m-0" />
+
+                                <div className="card-body">
+                                    <Form.Group>
+                                        <Form.Label>Current Password</Form.Label>
+                                        <Form.Control type="text" defaultValue="password" />
                                     </Form.Group>
                                     <Form.Group>
-                                        <Form.Label>Company</Form.Label>
-                                        <Form.Control type="text" defaultValue="BookMarkd" />
+                                        <Form.Label>New Password</Form.Label>
+                                        <Form.Control type="text" defaultValue="password" />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Confirm New Password</Form.Label>
+                                        <Form.Control type="text" defaultValue="password" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
