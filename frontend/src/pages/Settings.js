@@ -8,7 +8,7 @@ function Settings() {
                 Account settings
             </h4>
 
-            <Tab.Container defaultActiveKey="#account-general">
+            <Tab.Container defaultActiveKey="#general">
                 <Row>
                     <Col md={3} className="pt-0">
                         <Nav variant="pills" className="flex-column account-settings-links">
@@ -61,6 +61,34 @@ function Settings() {
                                     <Form.Group>
                                         <Form.Label>Confirm New Password</Form.Label>
                                         <Form.Control type="text" defaultValue="password" />
+                                    </Form.Group>
+                                </div>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="#info">
+                                <hr className="border-light m-0" />
+
+                                <div className="card-body">
+                                    <Form.Group>
+                                        <Form.Label>Address</Form.Label>
+                                        <Form.Control type="text" defaultValue="1234 Unicorn Lane" />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="text" defaultValue="John Smith" />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Control type="text" defaultValue="XXX-XXX-XXXX" />
+                                    </Form.Group>
+                                </div>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="#notifications">
+                                <hr className="border-light m-0" />
+
+                                <div className="card-body">
+                                    <Form.Group>
+                                        <Form.Label>Push Notifications</Form.Label>
+                                        <Form.Check type="switch" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
