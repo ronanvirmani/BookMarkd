@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
+// import Container from 'react-bootstrap/Container';
 import {Card, Col, Row, Image, Form, Button} from "react-bootstrap";
 
 function Annotations() {
@@ -27,17 +27,20 @@ function Annotations() {
     }
 
     return (
-        <Container>
+        <div className="bg-beige">
             {/* Title details */}
             <hr/>
+            <br/>
             <h2 className="text-center">SampleTitle Annotations</h2>
+            <br/>
             <hr/>
+            <br/>
 
             {/* Actions user can perform */}
-            <Container>
+            <div className="container">
                 <Row>
                     <Col xs={12} md={6}>
-                        <Card className="card-custom">
+                        <Card class="bg-green">
                             <Card.Body>
                                 <Card.Title className="text-center">Add New Annotation</Card.Title>
                                 <Card.Text>
@@ -86,18 +89,19 @@ function Annotations() {
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </div>
 
+            <br/>
             <hr/>
+            <br/>
 
             {/* Annotations */}
-            <Container>
+            <div className="container">
                 <Row>
                     {annotations}
                 </Row>
-            </Container>
-
-        </Container>
+            </div>
+        </div>
     );
 }
 
