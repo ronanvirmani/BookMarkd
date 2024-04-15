@@ -36,6 +36,7 @@ function Annotations() {
             <hr/>
             <br/>
 
+            {/* User Actions */}
             <div className="container">
             <div className="grid grid-cols-2 gap-4">
                 <div className="rounded bg-green p-4">
@@ -77,71 +78,6 @@ function Annotations() {
                 </div>
             </div>
             </div>
-
-
-            {/*<div className="columns-2 container">*/}
-            {/*    <div className="container rounded bg-green">*/}
-            {/*        <h3 className="text-center text-xl">Add New Annotation</h3>*/}
-            {/*    </div>*/}
-            {/*    <div className="container rounded bg-green">*/}
-            {/*        <h3 className="text-center text-xl">Filter / Search</h3>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-            {/* Actions user can perform */}
-            {/*<div className="container">*/}
-            {/*    <Row>*/}
-            {/*        <Col xs={12} md={6}>*/}
-            {/*            <Card class="bg-green">*/}
-            {/*                <Card.Body className="bg-green">*/}
-            {/*                    <Card.Title className="text-center">Add New Annotation</Card.Title>*/}
-            {/*                    <Card.Text>*/}
-            {/*                        <Form>*/}
-            {/*                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">*/}
-            {/*                                <Form.Label>Page Number</Form.Label>*/}
-            {/*                                <Form.Control type="text" placeholder="123" />*/}
-            {/*                            </Form.Group>*/}
-            {/*                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">*/}
-            {/*                                <Form.Label>Annotation Text</Form.Label>*/}
-            {/*                                <Form.Control as="textarea" rows={2} />*/}
-            {/*                            </Form.Group>*/}
-            {/*                            <div className="text-center">*/}
-            {/*                                <Button className="btn-custom bg-brown" variant="dark">Add Annotation</Button>*/}
-            {/*                            </div>*/}
-            {/*                        </Form>*/}
-            {/*                    </Card.Text>*/}
-            {/*                </Card.Body>*/}
-            {/*            </Card>*/}
-            {/*        </Col>*/}
-            {/*        <Col xs={12} md={6}>*/}
-            {/*            <Card className="card-custom">*/}
-            {/*                <Card.Body>*/}
-            {/*                    <Card.Title className="text-center">Filter / Search</Card.Title>*/}
-            {/*                    <Card.Text>*/}
-            {/*                        <Form>*/}
-            {/*                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">*/}
-            {/*                                <Form.Label>Sort: </Form.Label>*/}
-            {/*                                <Form.Select aria-label="Default select example">*/}
-            {/*                                    <option>Open this select menu</option>*/}
-            {/*                                    <option value="1">One</option>*/}
-            {/*                                    <option value="2">Two</option>*/}
-            {/*                                    <option value="3">Three</option>*/}
-            {/*                                </Form.Select>*/}
-            {/*                            </Form.Group>*/}
-            {/*                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">*/}
-            {/*                                <Form.Label>Search Keywords: </Form.Label>*/}
-            {/*                                <Form.Control type="text" as="textarea" rows={2} placeholder="keywords and phrases here" />*/}
-            {/*                            </Form.Group>*/}
-            {/*                            <div className="text-center">*/}
-            {/*                                <Button className="btn-custom bg-brown" variant="dark">Apply Filters</Button>*/}
-            {/*                            </div>*/}
-            {/*                        </Form>*/}
-            {/*                    </Card.Text>*/}
-            {/*                </Card.Body>*/}
-            {/*            </Card>*/}
-            {/*        </Col>*/}
-            {/*    </Row>*/}
-            {/*</div>*/}
 
             <br/>
             <hr/>
