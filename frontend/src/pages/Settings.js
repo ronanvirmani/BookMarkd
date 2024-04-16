@@ -37,6 +37,10 @@ function Settings() {
                                         <Form.Control type="text" defaultValue="test" />
                                     </Form.Group>
                                     <Form.Group>
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="text" defaultValue="test" />
+                                    </Form.Group>
+                                    <Form.Group>
                                         <Form.Label>E-mail</Form.Label>
                                         <Form.Control type="text" defaultValue="test@example.com" />
                                     </Form.Group>
@@ -66,15 +70,15 @@ function Settings() {
                                 <div className="card-body">
                                     <Form.Group>
                                         <Form.Label>Address</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="1234 Unicorn Lane" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="John Smith" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Phone Number</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="XXX-XXX-XXXX" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
