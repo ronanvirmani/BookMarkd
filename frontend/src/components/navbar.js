@@ -19,7 +19,7 @@ export default function Navbar() {
             <div className="flex flex-row items-center space-x-8">
                 {user && (
                     <div className="flex flex-row space-x-8">
-                        <Link to="/home">Home</Link>
+                        {/*<Link to="/home">Home</Link>*/}
 
                         <Link to="/profile" className="">
                         Profile

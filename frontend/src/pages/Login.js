@@ -22,7 +22,7 @@ const Login = () => {
             window.location.href = "/fail";
           } else {
             console.log(data.user);
-            window.location.href = "/home";
+            window.location.href = "/profile";
           }
     }
 
