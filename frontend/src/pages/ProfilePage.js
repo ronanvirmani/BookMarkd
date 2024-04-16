@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import bookSearch from '../components/bookSearch';
 import ProfileHeader from '../components/ProfileHeader';
 import BookList from '../components/BookList';
-import Footer from '../components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TopTags from '../components/TopTags'; // Make sure to import the TopTags component
 
