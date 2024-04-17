@@ -23,7 +23,7 @@ const Signup = () => {
         setUser(data.user);
 
         // redirect to home
-        window.location.href = "/home";
+        window.location.href = "/profile";
 
     }
 

@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import Annotations from "./pages/Annotations";
 import Navbar from "./components/navbar";
 import Footer from './components/footer';
-import HomePage from './pages/HomePage';
 import Loginfail from './pages/Loginfail';
 import Settings from './pages/Settings';
 
@@ -24,7 +23,6 @@ root.render(
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/fail" element={<Loginfail />} />
-        <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/annotations" element={<Annotations />} />
         <Route path="/settings" element={<Settings />} />
