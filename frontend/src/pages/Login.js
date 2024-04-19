@@ -6,6 +6,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loginFail, setLoginFail] = useState(false)
     const { setUser, supabase } = useAppContext();
 
     async function handleLogin(event) {
@@ -19,7 +20,7 @@ const Login = () => {
 
           // redirect to home page if login successful, otherwise go to the login_unsuccessful page
           if (error) {
-            window.location.href = "/fail";
+            setLoginFail(true);
           } else {
             console.log(data.user);
             window.location.href = "/profile";
@@ -30,6 +31,11 @@ const Login = () => {
     return (
         <div className="w-1/3 mx-auto mt-16 p-12 bg-gray-50 border border-gray-200 rounded-xl shadow">
           <h1 className="text-3xl font-semibold text-center mb-8">Welcome Back</h1>
+          {loginFail && (
+            <p className="text-base  text-center text-red-500">
+              Invalid credentials. Please try again.
+            </p>
+          )}
           <form className="flex flex-col space-y-6">
             <label>
               <input
