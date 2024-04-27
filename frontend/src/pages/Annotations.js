@@ -4,12 +4,16 @@ import {Card, Col, Row} from "react-bootstrap";
 import {useAppContext} from "../AppContext";
 
 function Annotations() {
-    const { supabase } = useAppContext();
+    const { user, supabase, loading } = useAppContext();
     const [annotations, setAnnotations] = useState([]);
     const [sort, setSort] = useState("ascendingPage"); // Default sort order
     const user_book_id = 1; // Assuming user_book_id is constant for this component
+    const [keywords, setKeywords] = useState([]);
 
     useEffect(() => {
+        if(!user && !loading){
+            window.location.href = "/";
+        }
         async function fetchData() {
             try {
                 const { data, error } = await supabase
@@ -20,6 +24,7 @@ function Annotations() {
                     console.error("Error fetching annotations:", error);
                 } else {
                     let sortedData = data;
+                    //apply sort
                     if (sort === "ascendingPage") {
                         sortedData = data.sort((a, b) => a.page_number - b.page_number);
                     }
@@ -64,7 +69,7 @@ function Annotations() {
     function handleSort(event) {
         event.preventDefault();
         setSort(document.getElementById("sort").value);
-        console.log("Sort:", sort);
+        setKeywords(document.getElementById("searchKeywords").value.split(",").map(keyword => keyword.trim()));
     }
 
     return (
@@ -127,7 +132,12 @@ function Annotations() {
             {/* Annotations */}
             <div className="container">
                 <Row>
-                    {annotations.map(annotation => (
+                    {annotations
+                        .filter(annotation => {
+                            const annotationText = annotation.text.toLowerCase();
+                            return keywords.every(keyword => annotationText.includes(keyword.toLowerCase()));
+                        })
+                        .map(annotation => (
                         <Col xs={12} md={6} lg={4} className="mb-4" key={annotation.id}>
                             <Card>
                                 <Card.Body>
