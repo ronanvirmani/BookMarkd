@@ -44,7 +44,7 @@ function Annotations() {
             }
         }
         fetchData();
-    }, [supabase, sort]);
+    }, [supabase, sort, loading, user]);
 
     async function handleAdd(event) {
         const pageNumber = document.getElementById("pageNumber").value;
