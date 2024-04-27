@@ -4,13 +4,16 @@ import {Card, Col, Row} from "react-bootstrap";
 import {useAppContext} from "../AppContext";
 
 function Annotations() {
-    const { supabase } = useAppContext();
+    const { user, supabase, loading } = useAppContext();
     const [annotations, setAnnotations] = useState([]);
     const [sort, setSort] = useState("ascendingPage"); // Default sort order
     const user_book_id = 1; // Assuming user_book_id is constant for this component
     const [keywords, setKeywords] = useState([]);
 
     useEffect(() => {
+        if(!user && !loading){
+            window.location.href = "/";
+        }
         async function fetchData() {
             try {
                 const { data, error } = await supabase

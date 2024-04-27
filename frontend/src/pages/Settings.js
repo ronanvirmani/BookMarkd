@@ -1,7 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col, Tab, Nav, Form, Button } from "react-bootstrap";
+import { useAppContext } from "../AppContext";
 
 function Settings() {
+
+    const { user, loading } = useAppContext();
+
+    useEffect(() => {
+        if(!user && !loading){
+            window.location.href = "/";
+        }
+    }, )
+
     return (
         <Container className="light-style flex-grow-1 container-p-y">
             <h4 className="font-weight-bold py-3 mb-4">

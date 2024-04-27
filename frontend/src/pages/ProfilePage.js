@@ -4,8 +4,19 @@ import ProfileHeader from '../components/ProfileHeader';
 import BookList from '../components/BookList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TopTags from '../components/TopTags'; // Make sure to import the TopTags component
+import { useAppContext } from '../AppContext';
 
 function ProfilePage() {
+
+  const { user, loading } = useAppContext();
+
+  useEffect(() => {
+    if(!user && !loading){
+      window.location.href = "/";
+    }
+  }, )
+
+
   const profilePicUrl = 'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg';
   
   const favoriteBooks = [
