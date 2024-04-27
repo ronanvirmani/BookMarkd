@@ -1,29 +1,51 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import Container from 'react-bootstrap/Container';
-import {Card, Col, Row, Image, Form, Button} from "react-bootstrap";
+import {Card, Col, Row} from "react-bootstrap";
+import {useAppContext} from "../AppContext";
 
 function Annotations() {
+    const { supabase } = useAppContext();
+    const [annotations, setAnnotations] = useState([]);
+    const user_book_id = 1; // Assuming user_book_id is constant for this component
 
-    const annotations = [];
-    for (let i = 0; i < 10; i++) {
-        // get from database
-        let pageNumber = 302;
-        let text = "Some quick example text to build on the card title and make up the bulk of the card's content. \"Here is an example quote.\"";
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const { data, error } = await supabase
+                    .from('annotation')
+                    .select()
+                    .eq('user_book_id', user_book_id); // Assuming user_book_id is constant for this component
+                if (error) {
+                    console.error("Error fetching annotations:", error);
+                } else {
+                    const sortedData = data.sort((a, b) => a.page_number - b.page_number); // move to sort eventually
+                    setAnnotations(sortedData || []);
+                }
+            } catch (error) {
+                console.error("Error fetching annotations:", error);
+            }
+        }
+        fetchData();
+    }, [supabase]);
 
-        // perform search filters here?
+    async function handleAdd(event) {
+        const pageNumber = document.getElementById("pageNumber").value;
+        const annotationText = document.getElementById("annotationText").value;
 
-        annotations.push(
-            <Col xs={12} md={6} lg={4} className="mb-4" key={i}>
-                <Card>
-                    <Card.Body>
-                        <Card.Subtitle className="mb-2 text-muted">Page {pageNumber}</Card.Subtitle>
-                        <Card.Text>
-                            {text}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </Col>
-        );
+        try {
+            const { error } = await supabase
+                .from('annotation')
+                .insert({ user_book_id: user_book_id, text: annotationText, page_number: pageNumber });
+            if (error) {
+                console.error("Error adding annotation:", error);
+            }
+            else {
+                console.log("successfully added annotation");
+            }
+        }
+        catch (error) {
+            console.error("Error adding annotation:", error);
+        }
     }
 
     return (
@@ -41,7 +63,7 @@ function Annotations() {
             <div className="grid grid-cols-2 gap-4">
                 <div className="rounded bg-green p-4">
                     <h3 className="text-center text-2xl">Add New Annotation</h3>
-                    <form>
+                    <form onSubmit={handleAdd}>
                         <div className="mb-4">
                             <label htmlFor="pageNumber" className="block mb-2">Page Number</label>
                             <input type="text" id="pageNumber" className="w-full rounded py-2 px-3" placeholder="i.e. 123" />
@@ -51,7 +73,7 @@ function Annotations() {
                             <textarea id="annotationText" rows="2" className="rounded w-full py-2 px-3" placeholder="i.e. your thoughts, quotes, etc."></textarea>
                         </div>
                         <div className="text-center">
-                            <button className="bg-brown text-white px-4 py-2 rounded-full">Add Annotation</button>
+                            <button className="bg-brown text-white px-4 py-2 rounded-full" type="submit">Add Annotation</button>
                         </div>
                     </form>
                 </div>
@@ -86,7 +108,18 @@ function Annotations() {
             {/* Annotations */}
             <div className="container">
                 <Row>
-                    {annotations}
+                    {annotations.map(annotation => (
+                        <Col xs={12} md={6} lg={4} className="mb-4" key={annotation.id}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Subtitle className="mb-2 text-muted">Page {annotation.page_number}</Card.Subtitle>
+                                    <Card.Text>
+                                        {annotation.text}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
             </div>
         </div>
