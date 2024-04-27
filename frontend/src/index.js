@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import Annotations from "./pages/Annotations";
 import Navbar from "./components/navbar";
 import Footer from './components/footer';
-import Loginfail from './pages/Loginfail';
 import Settings from './pages/Settings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,7 +21,6 @@ root.render(
       <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/fail" element={<Loginfail />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/annotations" element={<Annotations />} />
         <Route path="/settings" element={<Settings />} />

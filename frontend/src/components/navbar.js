@@ -15,20 +15,20 @@ export default function Navbar() {
 
     return (
         <nav className="flex flex-row justify-between py-4 px-12 shadow">
-            <h1>BookMark'd</h1>
+            <h1 className="text-brown">BookMark'd</h1>
             <div className="flex flex-row items-center space-x-8">
                 {user && (
                     <div className="flex flex-row space-x-8">
-                        <Link to="/profile" className="">
+                        <Link to="/profile" className="text-green">
                         Profile
                         </Link>
-                        <Link to="/annotations" className="">
+                        <Link to="/annotations" className="text-green">
                         Annotations
                         </Link>
-                        <Link to="/settings" className="">
+                        <Link to="/settings" className="text-green">
                         Settings
                         </Link>
-                        <button onClick={handleLogout} className="">
+                        <button onClick={handleLogout} className="text-brown">
                         Logout
                         </button>
                     </div>
