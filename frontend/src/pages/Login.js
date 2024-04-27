@@ -68,7 +68,7 @@ const Login = () => {
               <p className="">Dont have an account yet?</p>
               <Link
                 to="/signup"
-                className="bg-green-500 px-3 py-2 rounded-lg text-black font-semibold"
+                className="bg-green-500 px-3 rounded-lg text-black font-semibold"
               >
                 Signup
               </Link>
