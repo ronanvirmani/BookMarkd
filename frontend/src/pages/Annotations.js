@@ -66,7 +66,7 @@ function Annotations() {
     function handleSort(event) {
         event.preventDefault();
         setSort(document.getElementById("sort").value);
-        setKeywords(document.getElementById("searchKeywords").value.split(","));
+        setKeywords(document.getElementById("searchKeywords").value.split(",").map(keyword => keyword.trim()));
     }
 
     return (
