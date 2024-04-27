@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAppContext } from '../AppContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useHistory
 
 const Login = () => {
 
@@ -8,6 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [loginFail, setLoginFail] = useState(false)
     const { setUser, supabase } = useAppContext();
+    const navigate = useNavigate();
+
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -23,7 +25,7 @@ const Login = () => {
             setLoginFail(true);
           } else {
             console.log(data.user);
-            window.location.href = "/profile";
+            navigate('/profile');
           }
     }
 
