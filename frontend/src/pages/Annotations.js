@@ -6,6 +6,7 @@ import {useAppContext} from "../AppContext";
 function Annotations() {
     const { supabase } = useAppContext();
     const [annotations, setAnnotations] = useState([]);
+    const [sort, setSort] = useState("ascendingPage"); // Default sort order
     const user_book_id = 1; // Assuming user_book_id is constant for this component
 
     useEffect(() => {
@@ -18,7 +19,19 @@ function Annotations() {
                 if (error) {
                     console.error("Error fetching annotations:", error);
                 } else {
-                    const sortedData = data.sort((a, b) => a.page_number - b.page_number); // move to sort eventually
+                    let sortedData = data;
+                    if (sort === "ascendingPage") {
+                        sortedData = data.sort((a, b) => a.page_number - b.page_number);
+                    }
+                    else if (sort === "descendingPage") {
+                        sortedData = data.sort((a, b) => b.page_number - a.page_number);
+                    }
+                    else if (sort === "mostRecent") {
+                        sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    }
+                    else if (sort === "leastRecent") {
+                        sortedData = data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+                    }
                     setAnnotations(sortedData || []);
                 }
             } catch (error) {
@@ -26,7 +39,7 @@ function Annotations() {
             }
         }
         fetchData();
-    }, [supabase]);
+    }, [supabase, sort]);
 
     async function handleAdd(event) {
         const pageNumber = document.getElementById("pageNumber").value;
@@ -46,6 +59,12 @@ function Annotations() {
         catch (error) {
             console.error("Error adding annotation:", error);
         }
+    }
+
+    function handleSort(event) {
+        event.preventDefault();
+        setSort(document.getElementById("sort").value);
+        console.log("Sort:", sort);
     }
 
     return (
@@ -79,14 +98,14 @@ function Annotations() {
                 </div>
                 <div className="rounded bg-green p-4">
                     <h3 className="text-center text-2xl">Filter / Search</h3>
-                    <form>
+                    <form onSubmit={handleSort}>
                         <div className="mb-4">
                             <label htmlFor="sort" className="block mb-2">Sort:</label>
                             <select id="sort" className="form-select w-full">
-                                <option value="1">Ascending Page Order</option>
-                                <option value="2">Descending Page Order</option>
-                                <option value="3">Most Recently Added</option>
-                                <option value="4">Least Recently Added</option>
+                                <option value="ascendingPage">Ascending Page Order</option>
+                                <option value="descendingPage">Descending Page Order</option>
+                                <option value="mostRecent">Most Recently Added</option>
+                                <option value="leastRecent">Least Recently Added</option>
                             </select>
                         </div>
                         <div className="mb-4">
@@ -94,7 +113,7 @@ function Annotations() {
                             <textarea id="searchKeywords" rows={2} className="rounded w-full py-2 px-3" placeholder="keywords and phrases here" />
                         </div>
                         <div className="text-center">
-                            <button className="bg-brown text-white px-4 py-2 rounded-full">Apply Filters</button>
+                            <button type="submit" className="bg-brown text-white px-4 py-2 rounded-full">Apply Filters</button>
                         </div>
                     </form>
                 </div>
