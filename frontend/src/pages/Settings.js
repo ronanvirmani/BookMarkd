@@ -1,7 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import { Container, Row, Col, Tab, Nav, Form, Button } from "react-bootstrap";
 
 function Settings() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
     return (
         <Container className="light-style flex-grow-1 container-p-y">
             <h4 className="font-weight-bold py-3 mb-4">
@@ -34,15 +38,15 @@ function Settings() {
                                 <div className="card-body">
                                     <Form.Group>
                                         <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" defaultValue="test" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" defaultValue="test" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>E-mail</Form.Label>
-                                        <Form.Control type="text" defaultValue="test@example.com" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
@@ -52,15 +56,15 @@ function Settings() {
                                 <div className="card-body">
                                     <Form.Group>
                                         <Form.Label>Current Password</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>New Password</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Confirm New Password</Form.Label>
-                                        <Form.Control type="text" defaultValue="password" />
+                                        <Form.Control type="text" defaultValue="" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
@@ -70,7 +74,7 @@ function Settings() {
                                 <div className="card-body">
                                     <Form.Group>
                                         <Form.Label>Address</Form.Label>
-                                        <Form.Control type="text" defaultValue="1234 Unicorn Lane" />
+                                        <Form.Control type="text" defaultValue="123 Main Street" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Name</Form.Label>
@@ -78,7 +82,7 @@ function Settings() {
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Phone Number</Form.Label>
-                                        <Form.Control type="text" defaultValue="XXX-XXX-XXXX" />
+                                        <Form.Control type="text" defaultValue="(555) 555-5555" />
                                     </Form.Group>
                                 </div>
                             </Tab.Pane>
