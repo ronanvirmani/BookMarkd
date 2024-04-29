@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from "../AppContext";
 
 const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { user, setUser, supabase } = useAppContext();
+    const { setUser, supabase } = useAppContext();
+    const navigate = useNavigate();
+
 
     async function handleSignup(event) {
         event.preventDefault();
@@ -23,14 +25,14 @@ const Signup = () => {
         setUser(data.user);
 
         // redirect to home
-        window.location.href = "/profile";
+        navigate('/profile');
 
     }
 
 
     return (
-        <div className="w-1/3 mx-auto mt-16 p-12 bg-gray-50 border border-gray-200 rounded-xl shadow">
-          <h1 className="text-3xl font-semibold text-center mb-8">Sign Up</h1>
+        <div className="w-1/3 mx-auto mt-16 p-12 bg-beige border border-gray-200 rounded-xl shadow">
+          <h1 className="text-3xl font-semibold text-center mb-8 text-brown">Sign Up</h1>
           <form className="flex flex-col space-y-6">
             <label className="">
               <input
@@ -52,7 +54,7 @@ const Signup = () => {
             </label>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white font-semibold p-3 rounded-lg"
+              className="w-full bg-green text-white font-semibold p-3 rounded-lg"
               onClick={handleSignup}
             >
               Submit

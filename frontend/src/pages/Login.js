@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useAppContext } from '../AppContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useHistory
 
 const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loginFail, setLoginFail] = useState(false)
     const { setUser, supabase } = useAppContext();
+    const navigate = useNavigate();
+
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -19,17 +22,22 @@ const Login = () => {
 
           // redirect to home page if login successful, otherwise go to the login_unsuccessful page
           if (error) {
-            window.location.href = "/fail";
+            setLoginFail(true);
           } else {
             console.log(data.user);
-            window.location.href = "/profile";
+            navigate('/profile');
           }
     }
 
 
     return (
-        <div className="w-1/3 mx-auto mt-16 p-12 bg-gray-50 border border-gray-200 rounded-xl shadow">
-          <h1 className="text-3xl font-semibold text-center mb-8">Welcome Back</h1>
+        <div className="w-1/3 mx-auto mt-16 p-12 bg-beige border border-green rounded-xl shadow">
+          <h1 className="text-3xl font-semibold text-center mb-8 text-brown">Welcome Back</h1>
+          {loginFail && (
+            <p className="text-base  text-center text-red-500">
+              Invalid credentials. Please try again.
+            </p>
+          )}
           <form className="flex flex-col space-y-6">
             <label>
               <input
@@ -51,7 +59,7 @@ const Login = () => {
             </label>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white font-semibold p-3 rounded-lg"
+              className="w-full bg-green text-white font-semibold p-3 rounded-lg"
               onClick={handleLogin}
             >
               Login
@@ -60,7 +68,7 @@ const Login = () => {
               <p className="">Dont have an account yet?</p>
               <Link
                 to="/signup"
-                className="bg-green-500 px-3 py-2 rounded-lg text-black font-semibold"
+                className="bg-green-500 px-3 rounded-lg text-black font-semibold"
               >
                 Signup
               </Link>

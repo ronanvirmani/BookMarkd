@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { Container, Row, Col, Tab, Nav, Form, Button } from "react-bootstrap";
+import { useAppContext } from "../AppContext";
 
 function Settings() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+
+    const { user, loading } = useAppContext();
+
+    useEffect(() => {
+        if(!user && !loading){
+            window.location.href = "/";
+        }
+    }, )
 
     return (
         <Container className="light-style flex-grow-1 container-p-y">
