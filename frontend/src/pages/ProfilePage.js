@@ -11,9 +11,9 @@ function ProfilePage() {
   const { user, loading } = useAppContext();
 
   useEffect(() => {
-    if(!user && !loading){
-      window.location.href = "/";
-    }
+    // if(!user && !loading){
+    //   window.location.href = "/";
+    // }
   }, )
 
 
@@ -23,6 +23,9 @@ function ProfilePage() {
     { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 1" },
     { imageUrl: "https://m.media-amazon.com/images/I/817Xh+bqwOL._AC_UF1000,1000_QL80_.jpg", altText: "Dune 2" },
     { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 3" },
+    { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 3" },
+    { imageUrl: "https://placehold.co/200x300", altText: "Favorite Book 3" },
+
   ];
   
   const recentBooks = [
@@ -41,7 +44,7 @@ function ProfilePage() {
       <bookSearch />
       <ProfileHeader profilePicUrl={profilePicUrl}/>
       <TopTags tags={tags} />
-      <BookList title="Favorite Books" books={favoriteBooks} />
+      <BookList title="Favorite Books" books={favoriteBooks} includeAddNew={true} />
       <BookList title="Recent Annotations" books={recentBooks} />
     </div>
   );
