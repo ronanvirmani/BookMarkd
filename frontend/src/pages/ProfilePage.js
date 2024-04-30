@@ -39,7 +39,8 @@ function ProfilePage() {
 
     const booksFormatted = data.map(book => ({
       imageUrl: book.book_cover_image,
-      altText: book.title || "No title available" // Assuming 'title' is another field in your data
+      altText: book.title || "No title available", // Assuming 'title' is another field in your data
+      userBookId: book.userBookId,
     }));
 
       setFavoriteBooks(booksFormatted);
