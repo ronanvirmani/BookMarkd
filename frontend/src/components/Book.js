@@ -3,6 +3,7 @@ import React from 'react';
 
 function Book({ imageUrl, altText }) {
   // Inline style for resizing
+  console.log(imageUrl); // Debugging output
   const imageStyle = {
     width: '200px',
     height: '300px',

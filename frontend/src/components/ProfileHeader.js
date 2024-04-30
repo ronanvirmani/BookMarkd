@@ -1,6 +1,10 @@
 import React from 'react';
+import { useAppContext } from '../AppContext';
+
 
 function ProfileHeader({ profilePicUrl }) {
+  const { user } = useAppContext(); // Destructure user from the context
+
   const headerStyle = {
     backgroundColor: '#FFD700', // Gold
     padding: '20px',
@@ -28,7 +32,11 @@ function ProfileHeader({ profilePicUrl }) {
       <div style={headerStyle} className="row">
         <div className="col-md-3">
           <img src={profilePicUrl} alt="Profile" style={{borderRadius: '50%', width: '100px', height: '100px'}} />
-          <h3>GOJOS</h3>
+          {user ? (
+            <h3>{user.email}</h3>  // Display the user's email
+          ) : (
+            <h3>Loading...</h3>  // Placeholder text while loading
+          )}
           <p>description right here</p>
         </div>
         <div className="col-md-9">
