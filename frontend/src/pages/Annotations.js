@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 // import Container from 'react-bootstrap/Container';
 import {Card, Col, Row} from "react-bootstrap";
 import {useAppContext} from "../AppContext";
+import { useParams } from 'react-router-dom';
 
 function Annotations() {
+    const { userBookId } = useParams(); // This will extract userBookId from the URL
     const { user, supabase, loading } = useAppContext();
     const [annotations, setAnnotations] = useState([]);
     const [sort, setSort] = useState("ascendingPage"); // Default sort order
@@ -19,7 +21,7 @@ function Annotations() {
                 const { data, error } = await supabase
                     .from('annotation')
                     .select()
-                    .eq('user_book_id', user_book_id); // Assuming user_book_id is constant for this component
+                    .eq('user_book_id', userBookId); // Assuming user_book_id is constant for this component
                 if (error) {
                     console.error("Error fetching annotations:", error);
                 } else {

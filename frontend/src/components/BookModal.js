@@ -41,6 +41,7 @@ function BookModal({ closeModal }) {
       user_id: user.id,
       book_name: selectedObject.name,
       book_cover_image: selectedObject.url, // This should be dynamically determined
+      userBookId: selectedObject.userBookId,
     };
   
     const { data: insertData, error: insertError } = await supabase
@@ -66,9 +67,9 @@ function BookModal({ closeModal }) {
           <select value={selectedBook} onChange={handleBookChange} style={{ width: '100%', padding: '10px', marginBottom: '20px' }}>
             <option value="">Select a book</option>
             {/* Populate this with actual book data */}
-            <option value='{"name":"Dune", "url":"https://cdn.domestika.org/c_fit,dpr_auto,f_auto,q_80,t_base_params,w_820/v1680860505/content-items/013/518/117/dunellibre-copia1-original.jpg?1680860505"}'>Dune</option>
-            <option value='{"name":"A Game Of Thrones", "url":"https://cdn.kobo.com/book-images/dd1baacc-184b-4f28-a7d5-6dbe70816fb7/1200/1200/False/a-game-of-thrones.jpg"}'>A Game Of Thrones</option>
-            <option value='{"name":"East of Eden", "url":"https://upload.wikimedia.org/wikipedia/commons/9/9a/East_of_Eden_%281952_1st_ed_dust_jacket%29.jpg"}'>East of Eden</option>
+            <option value='{"name":"Dune", "url":"https://cdn.domestika.org/c_fit,dpr_auto,f_auto,q_80,t_base_params,w_820/v1680860505/content-items/013/518/117/dunellibre-copia1-original.jpg?1680860505", "userBookId":"1"}'>Dune</option>
+            <option value='{"name":"A Game Of Thrones", "url":"https://cdn.kobo.com/book-images/dd1baacc-184b-4f28-a7d5-6dbe70816fb7/1200/1200/False/a-game-of-thrones.jpg", "userBookId":"2"}'>A Game Of Thrones</option>
+            <option value='{"name":"East of Eden", "url":"https://upload.wikimedia.org/wikipedia/commons/9/9a/East_of_Eden_%281952_1st_ed_dust_jacket%29.jpg", "userBookId":"3"}'>East of Eden</option>
           </select>
           <button type="submit" style={{ width: '100%', padding: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }}>Submit</button>
         </form>

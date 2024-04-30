@@ -12,9 +12,11 @@ function BookList({ title, books, includeAddNew = false }) {
     <div className="container my-8">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="row">
-        {books.map((book, index) => (
+      {books.map((book, index) => (
           <div className="col-md-3" key={index} style={{ margin: '20px' }}>
-            <Book imageUrl={book.imageUrl} altText={book.altText} />
+            <Link to={`/annotations/${book.userBookId}`}> {/* Assuming each book object has userBookId */}
+              <Book imageUrl={book.imageUrl} altText={book.altText} />
+            </Link>
           </div>
         ))}
         {includeAddNew && (
