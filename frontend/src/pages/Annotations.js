@@ -14,7 +14,7 @@ function Annotations() {
 
     useEffect(() => {
         if(!user && !loading){
-            // window.location.href = "/";
+            window.location.href = "/";
         }
         async function fetchData() {
             try {
@@ -51,11 +51,12 @@ function Annotations() {
     async function handleAdd(event) {
         const pageNumber = document.getElementById("pageNumber").value;
         const annotationText = document.getElementById("annotationText").value;
+        console.log("Fetching annotations for ID handleAdd:", userBookId); // Check the ID value
 
         try {
             const { error } = await supabase
                 .from('annotation')
-                .insert({ user_book_id: user_book_id, text: annotationText, page_number: pageNumber });
+                .insert({ user_book_id: userBookId, text: annotationText, page_number: pageNumber });
             if (error) {
                 console.error("Error adding annotation:", error);
             }
