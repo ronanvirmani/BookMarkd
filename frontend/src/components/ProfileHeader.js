@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../AppContext';
 
 
-function ProfileHeader({ profilePicUrl }) {
+function ProfileHeader({ profilePicUrl, onUpdateProfilePicUrl }) {
   const { user } = useAppContext(); // Destructure user from the context
+  const [newUrl, setNewUrl] = useState('');
+  const [editMode, setEditMode] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await onUpdateProfilePicUrl(newUrl);
+    setEditMode(false); // Exit edit mode after submission
+  };
 
   const headerStyle = {
     backgroundColor: '#FFD700', // Gold
@@ -31,24 +39,17 @@ function ProfileHeader({ profilePicUrl }) {
     <div className="container" style={{marginTop: '30px'}}>
       <div style={headerStyle} className="row">
         <div className="col-md-3">
-          <img src={profilePicUrl} alt="Profile" style={{borderRadius: '50%', width: '100px', height: '100px'}} />
-          {user ? (
-            <h3>{user.email}</h3>  // Display the user's email
-          ) : (
-            <h3>Loading...</h3>  // Placeholder text while loading
+          <img src={profilePicUrl} alt="Profile" style={{borderRadius: '50%', width: '100px', height: '100px', cursor: 'pointer'}} onClick={() => setEditMode(true)} />
+          {editMode && (
+            <form onSubmit={handleSubmit}>
+              <input type="text" placeholder="Enter image URL" value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+              <button type="submit">Update</button>
+            </form>
           )}
+          {user ? <h3>{user.email}</h3> : <h3>Loading...</h3>}
           <p>description right here</p>
         </div>
-        <div className="col-md-9">
-          <div style={statsContainerStyle}>
-            {/* Each stat item */}
-            <div style={statStyle}><span className="font-weight-bold">25</span> Books</div>
-            <div style={statStyle}><span className="font-weight-bold">123</span> Annotations</div>
-            <div style={statStyle}><span className="font-weight-bold">20</span> Followers</div>
-            <div style={statStyle}><span className="font-weight-bold">12</span> Genres</div>
-            <div style={statStyle}><span className="font-weight-bold">20</span> Following</div>
-          </div>
-        </div>
+        ...
       </div>
     </div>
   );
