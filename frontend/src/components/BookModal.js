@@ -41,7 +41,7 @@ function BookModal({ closeModal }) {
       user_id: user.id,
       book_name: selectedObject.name,
       book_cover_image: selectedObject.url, // This should be dynamically determined
-      userBookId: selectedObject.userBookId,
+    //   userBookId: selectedObject.userBookId,
     };
   
     const { data: insertData, error: insertError } = await supabase
