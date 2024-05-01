@@ -62,7 +62,7 @@ function BookModal({ closeModal }) {
   return (
     <div className="modal-background" style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="modal-content" style={{ backgroundColor: 'white', padding: '20px', borderRadius: '5px', width: '300px' }}>
-        <h2>Select a Book</h2>
+        <h2 className='text-center text-brown'>Select a Book</h2>
         <form onSubmit={handleSubmit}>
           <select value={selectedBook} onChange={handleBookChange} style={{ width: '100%', padding: '10px', marginBottom: '20px' }}>
             <option value="">Select a book</option>
@@ -71,7 +71,7 @@ function BookModal({ closeModal }) {
             <option value='{"name":"A Game Of Thrones", "url":"https://cdn.kobo.com/book-images/dd1baacc-184b-4f28-a7d5-6dbe70816fb7/1200/1200/False/a-game-of-thrones.jpg", "userBookId":"2"}'>A Game Of Thrones</option>
             <option value='{"name":"East of Eden", "url":"https://upload.wikimedia.org/wikipedia/commons/9/9a/East_of_Eden_%281952_1st_ed_dust_jacket%29.jpg", "userBookId":"3"}'>East of Eden</option>
           </select>
-          <button type="submit" style={{ width: '100%', padding: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }}>Submit</button>
+          <button type="submit" className='rounded-3' style={{ width: '100%', padding: '10px', backgroundColor: '#808000', color: 'white', border: 'none' }}>Submit</button>
         </form>
         <button onClick={closeModal} style={{ width: '100%', padding: '10px', marginTop: '10px' }}>Close</button>
       </div>
