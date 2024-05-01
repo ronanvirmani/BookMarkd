@@ -7,7 +7,7 @@ import TopTags from '../components/TopTags';
 import { useAppContext } from '../AppContext';
 
 function ProfilePage() {
-  const { user, supabase, loading } = useAppContext();
+  const { user, supabase, loading, setUser } = useAppContext();
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,6 +18,22 @@ function ProfilePage() {
       window.location.href = "/";
     }
   }, [user, loading]);
+
+  const updateProfilePicUrl = async (newUrl) => {
+    try {
+      const { data, error } = await supabase
+        .from('book_table') // Assuming your user table is named 'users'
+        .update({ pfpURL: newUrl })
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+      console.log('Profile updated successfully:', newUrl);
+      setUser(current => ({ ...current, profile_pic_url: newUrl }));
+
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
 
   const fetchFavoriteBooks = async () => {
     try {
@@ -55,12 +71,12 @@ function ProfilePage() {
   return (
     <div>
       <bookSearch />
-      <ProfileHeader profilePicUrl={'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg'} />
+      <ProfileHeader profilePicUrl={user?.profile_pic_url || 'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg'} onUpdateProfilePicUrl={updateProfilePicUrl} />
       <TopTags tags={["Fiction", "LOTR", "Harry Potter Hater"]} />
       {isLoading ? (
         <p>Loading books...</p>
       ) : (
-        <BookList title="Annotated Books" books={favoriteBooks} includeAddNew={true} />
+        <BookList title="My Books" books={favoriteBooks} includeAddNew={true} />
       )}
       {/* <BookList title="Recent Annotations" books={[{ imageUrl: "https://placehold.co/200x300", altText: "Recent Book 1" }]} /> */}
     </div>
