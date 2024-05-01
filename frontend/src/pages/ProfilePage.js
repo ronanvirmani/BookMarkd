@@ -60,7 +60,7 @@ function ProfilePage() {
       {isLoading ? (
         <p>Loading books...</p>
       ) : (
-        <BookList title="Annotated Books" books={favoriteBooks} includeAddNew={true} />
+        <BookList title="My Books" books={favoriteBooks} includeAddNew={true} />
       )}
       {/* <BookList title="Recent Annotations" books={[{ imageUrl: "https://placehold.co/200x300", altText: "Recent Book 1" }]} /> */}
     </div>
