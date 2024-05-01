@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-// import Container from 'react-bootstrap/Container';
 import {Card, Col, Row} from "react-bootstrap";
 import {useAppContext} from "../AppContext";
 import { useParams } from 'react-router-dom';
@@ -9,12 +8,33 @@ function Annotations() {
     const { user, supabase, loading } = useAppContext();
     const [annotations, setAnnotations] = useState([]);
     const [sort, setSort] = useState("ascendingPage"); // Default sort order
-    const user_book_id = 2; // Assuming user_book_id is constant for this component
     const [keywords, setKeywords] = useState([]);
+    const [title, setTitle] = useState("TitleNotFound");
+
+    useEffect(() => {
+        async function getTitle() {
+            try {
+                const {data, error} = await supabase
+                    .from('book_table')
+                    .select()
+                    .eq('id', userBookId); // Assuming user_book_id is constant for this component
+                if (error) {
+                    console.error("Error fetching annotations:", error);
+                } else {
+                    console.log("Title is: ", data);
+                    setTitle(data[0].book_name);
+                }
+            }
+            catch (error) {
+                console.error("Error fetching annotations:", error);
+            }
+        }
+        getTitle();
+    }, [supabase, userBookId]);
 
     useEffect(() => {
         if(!user && !loading){
-            // window.location.href = "/";
+            window.location.href = "/";
         }
         async function fetchData() {
             try {
@@ -46,16 +66,17 @@ function Annotations() {
             }
         }
         fetchData();
-    }, [supabase, sort, loading, user]);
+    }, [supabase, sort, loading, user, userBookId]);
 
     async function handleAdd(event) {
         const pageNumber = document.getElementById("pageNumber").value;
         const annotationText = document.getElementById("annotationText").value;
+        console.log("Fetching annotations for ID handleAdd:", userBookId); // Check the ID value
 
         try {
             const { error } = await supabase
                 .from('annotation')
-                .insert({ user_book_id: user_book_id, text: annotationText, page_number: pageNumber });
+                .insert({ user_book_id: userBookId, text: annotationText, page_number: pageNumber });
             if (error) {
                 console.error("Error adding annotation:", error);
             }
@@ -79,7 +100,7 @@ function Annotations() {
             {/* Title details */}
             <hr/>
             <br/>
-            <h2 className="text-center text-3xl">SampleTitle Annotations</h2>
+            <h2 className="text-center text-3xl">{title} Annotations</h2>
             <br/>
             <hr/>
             <br/>
