@@ -14,7 +14,7 @@ function BookList({ title, books, includeAddNew = false }) {
       <div className="row">
       {books.map((book, index) => (
           <div className="col-md-3" key={index} style={{ margin: '20px' }}>
-            <Link to={`/annotations/${book.userBookId}`}> {/* Assuming each book object has userBookId */}
+            <Link to={`/annotations/${book.id}`}> {/* Assuming each book object has userBookId */}
               <Book imageUrl={book.imageUrl} altText={book.altText} />
             </Link>
           </div>
