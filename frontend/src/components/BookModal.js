@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../AppContext';
 
 function BookModal({ closeModal }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState('');
   const [selectedObject, setSelectedObject] = useState({});
 
-  const handleBookChange = (event) => {
-    setSelectedBook(event.target.value);
-    JSON.parse(event.target.value);
-    console.log("Event ID:" + event.target.value);
-    setSelectedObject(JSON.parse(event.target.value));
-  };
-
   const { user, supabase } = useAppContext();
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      if (searchTerm.length > 2) { // Trigger search for terms longer than 2 characters
+        const response = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
+        const booksData = data.docs.map(book => ({
+          name: book.title,
+          url: `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` // Assuming 'cover_i' exists
+        })).filter(book => book.url.includes('id')); // Filter out books without cover images
+        setBooks(booksData);
+      }
+    };
+
+    const timeoutId = setTimeout(() => {
+      fetchBooks();
+    }, 500); // Debounce the API call by 500ms
+
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
+
+  const handleBookChange = (event) => {
+    const book = JSON.parse(event.target.value);
+    setSelectedBook(event.target.value);
+    setSelectedObject(book);
+  };
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(user);
@@ -63,13 +85,19 @@ function BookModal({ closeModal }) {
     <div className="modal-background" style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="modal-content" style={{ backgroundColor: 'white', padding: '20px', borderRadius: '5px', width: '300px' }}>
         <h2 className='text-center text-brown'>Select a Book</h2>
+        <input 
+          type="text" 
+          placeholder="Search book by title..." 
+          value={searchTerm} 
+          onChange={e => setSearchTerm(e.target.value)} 
+          style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
+        />
         <form onSubmit={handleSubmit}>
           <select value={selectedBook} onChange={handleBookChange} style={{ width: '100%', padding: '10px', marginBottom: '20px' }}>
             <option value="">Select a book</option>
-            {/* Populate this with actual book data */}
-            <option value='{"name":"Dune", "url":"https://cdn.domestika.org/c_fit,dpr_auto,f_auto,q_80,t_base_params,w_820/v1680860505/content-items/013/518/117/dunellibre-copia1-original.jpg?1680860505", "userBookId":"1"}'>Dune</option>
-            <option value='{"name":"A Game Of Thrones", "url":"https://cdn.kobo.com/book-images/dd1baacc-184b-4f28-a7d5-6dbe70816fb7/1200/1200/False/a-game-of-thrones.jpg", "userBookId":"2"}'>A Game Of Thrones</option>
-            <option value='{"name":"East of Eden", "url":"https://upload.wikimedia.org/wikipedia/commons/9/9a/East_of_Eden_%281952_1st_ed_dust_jacket%29.jpg", "userBookId":"3"}'>East of Eden</option>
+            {books.map((book, index) => (
+              <option key={index} value={JSON.stringify(book)}>{book.name}</option>
+            ))}
           </select>
           <button type="submit" className='rounded-3' style={{ width: '100%', padding: '10px', backgroundColor: '#808000', color: 'white', border: 'none' }}>Submit</button>
         </form>
