@@ -21,6 +21,20 @@ const Signup = () => {
           console.log(error);
           return;
         }
+
+        const {error: insertError } = await supabase
+            .from("user")
+            .insert([{ 
+              id: data.user.id, 
+              name: data.user.email, 
+              email: data.user.email, 
+              phone: ""
+        }]);
+
+        if (insertError) {
+            console.error(insertError.message);
+            return;
+        }
     
         setUser(data.user);
 

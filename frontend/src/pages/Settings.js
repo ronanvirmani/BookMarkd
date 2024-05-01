@@ -4,11 +4,13 @@ import { useAppContext } from "../AppContext";
 
 function Settings() {
     const [selected, setSelected] = useState('#general');
+
     const [newName, setNewName] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [newPhone, setNewPhone] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [updateError, setUpdateError] = useState('');
 
@@ -18,20 +20,60 @@ function Settings() {
         if (!user && !loading) {
             window.location.href = "/";
         }
+
+        async function fetchData() {
+            try {
+                const { data, error } = await supabase
+                    .from('user')
+                    .select('name, email, phone')
+                    .eq('id', user.id);
+
+                if (error) {
+                    console.error("Error fetching annotations:", error);
+                }
+
+                if (data && data.length > 0) {
+                    const userData = data[0];
+                    console.log("User data:", userData);
+                    setNewName(userData.name || '');
+                    setNewEmail(userData.email || '');
+                    setNewPhone(userData.phone || '');
+                } else {
+                    console.log("No user found with the given ID");
+                }
+
+            } catch (error) {
+                console.error("Error fetching annotations:", error);
+            }
+        }
+        fetchData();
     }, [user, loading]);
 
     const updateUser = async () => {
         try {
-            console.log('Updating user data:', {email: newEmail});
-            const { error } = await supabase
-            .from('auth.users')
+            if (newPassword !== confirmPassword) {
+                setUpdateError("New password and confirm password don't match");
+                return;
+            }
+
+            const { error:updateError } = await supabase
+            .from('user')
             .update({
-                email: newEmail
+                name: newName,
+                email: newEmail,
+                phone: newPhone
             })
             .eq('id', user.id);
 
-            if (error) {
-                setUpdateError(error.message);
+            if (updateError) {
+                setUpdateError(updateError.message);
+                return;
+            }
+
+            const { error:passwordError } = await supabase.auth.updateUser({ email: newEmail, password: newPassword })
+
+            if (passwordError) {
+                setUpdateError(passwordError.message);
                 return;
             }
 
@@ -74,7 +116,7 @@ function Settings() {
                                                 type="text" 
                                                 name="newName"
                                                 placeHolder=""
-                                                className="form-control" 
+                                                className="form-control mb-2" 
                                                 value={newName}
                                                 onChange={(e) => setNewName(e.target.value)}
                                             />
@@ -85,7 +127,7 @@ function Settings() {
                                                 type="text" 
                                                 name="newEmail"
                                                 placeHolder=""
-                                                className="form-control" 
+                                                className="form-control mb-2" 
                                                 value={newEmail}
                                                 onChange={(e) => setNewEmail(e.target.value)}
                                             />
@@ -96,7 +138,7 @@ function Settings() {
                                                 type="text" 
                                                 name="newPhone"
                                                 placeHolder=""
-                                                className="form-control" 
+                                                className="form-control mb-2" 
                                                 value={newPhone}
                                                 onChange={(e) => setNewPhone(e.target.value)}
                                             />
@@ -112,7 +154,7 @@ function Settings() {
                                                 type="text"
                                                 name="newPassword"
                                                 placeholder=""
-                                                className="form-control"
+                                                className="form-control mb-2"
                                                 value={newPassword}
                                                 onChange={(e) => setNewPassword(e.target.value)}
                                             />
@@ -123,7 +165,7 @@ function Settings() {
                                                 type="text"
                                                 name="confirmPassword"
                                                 placeholder=""
-                                                className="form-control"
+                                                className="form-control mb-2"
                                                 value={confirmPassword}
                                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                             />
@@ -137,8 +179,8 @@ function Settings() {
             </div>
             <div className="text-center p-3 bg-beige">
                 <button className="bg-green hover:bg-brown text-white px-4 py-2 rounded-full" onClick={updateUser}>Save Changes</button>
-                {updateSuccess && <p className="text-base text-center text-green-500">User credentials updated successfully.</p>}
-                {updateError && <p className="text-base text-center text-red-500">{updateError}</p>}
+                {/* {updateSuccess && <p className="text-base text-center text-green-500">User credentials updated successfully.</p>}
+                {updateError && <p className="text-base text-center text-red-500">{updateError}</p>} */}
             </div>
         </>
     );
