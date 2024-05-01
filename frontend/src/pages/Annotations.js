@@ -152,7 +152,7 @@ function Annotations() {
                     <form onSubmit={handleSort}>
                         <div className="mb-4">
                             <label htmlFor="sort" className="block mb-2">Sort:</label>
-                            <select id="sort" className="form-select w-full">
+                            <select id="sort" className="form-select w-full" onChange={handleSort}>
                                 <option value="ascendingPage">Ascending Page Order</option>
                                 <option value="descendingPage">Descending Page Order</option>
                                 <option value="mostRecent">Most Recently Added</option>
