@@ -49,4 +49,4 @@ Welcome to BookMark'd, the ultimate web solution for those struggling to find th
 Ensure that you verify your email address after creating an account. If you encounter any issues during the use, double-check that email verification has been completed successfully.
 
 ### Live Version
-Visit the live deployed version of BookMark'd at book-markd.vercel.app
+Visit the live deployed version of BookMark'd at [book-markd.vercel.app](https://book-markd.vercel.app/)
