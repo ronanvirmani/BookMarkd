@@ -31,7 +31,8 @@ const Signup = () => {
 
 
     return (
-        <div className="w-1/3 mx-auto mt-16 p-12 bg-beige border border-gray-200 rounded-xl shadow">
+      <div className="bg-login-background bg-cover bg-center h-auto flex justify-center items-center">
+        <div className="w-1/3 mx-auto m-16 p-12 bg-beige border border-gray-200 rounded-xl shadow">
           <h1 className="text-3xl font-semibold text-center mb-8 text-brown">Sign Up</h1>
           <form className="flex flex-col space-y-6">
             <label className="">
@@ -70,6 +71,8 @@ const Signup = () => {
             </div>
           </form>
         </div>
+      </div>
+        
       );
 }
 

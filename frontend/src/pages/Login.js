@@ -31,7 +31,8 @@ const Login = () => {
 
 
     return (
-        <div className="w-1/3 mx-auto mt-16 p-12 bg-beige border border-green rounded-xl shadow">
+      <div className="bg-login-background bg-cover bg-center h-auto flex justify-center items-center">
+        <div className="w-1/3 mx-auto m-16 p-14 bg-beige border border-green rounded-xl shadow">
           <h1 className="text-3xl font-semibold text-center mb-8 text-brown">Welcome Back</h1>
           {loginFail && (
             <p className="text-base  text-center text-red-500">
@@ -75,6 +76,8 @@ const Login = () => {
             </div>
           </form>
         </div>
+      </div>
+        
       );
 }
 
