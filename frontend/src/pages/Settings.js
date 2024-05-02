@@ -7,7 +7,7 @@ function Settings() {
 
     const [newName, setNewName] = useState('');
     const [newEmail, setNewEmail] = useState('');
-    const [newPhone, setNewPhone] = useState('');
+    const [newDescr, setNewDescr] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -25,7 +25,7 @@ function Settings() {
             try {
                 const { data, error } = await supabase
                 .from('user')
-                .select('name, email, phone')
+                .select('name, email, description')
                 .eq('id', user.id);
                 
                 if (error) {
@@ -37,7 +37,7 @@ function Settings() {
                     console.log("User data:", userData);
                     setNewName(userData.name || '');
                     setNewEmail(userData.email || '');
-                    setNewPhone(userData.phone || '');
+                    setNewDescr(userData.description || '');
                 } else {
                     console.log("No user found with the given ID");
                 }
@@ -55,14 +55,12 @@ function Settings() {
                 setUpdateError("New password and confirm password don't match");
                 return;
             }
-
             const { error:updateError } = await supabase
             .from('user')
             .update({
                 name: newName,
                 email: newEmail,
-                phone: newPhone,
-                password: newPassword
+                description: newDescr
             })
             .eq('id', user.id);
 
@@ -71,14 +69,18 @@ function Settings() {
                 return;
             }
 
-            const { error:passwordError } = await supabase.auth.updateUser({ email: newEmail, password: newPassword })
 
-            if (passwordError) {
-                setUpdateError(passwordError.message);
-                return;
+            if (newPassword !== '') {
+                const { error:passwordError } = await supabase.auth.updateUser({ email: newEmail, password: newPassword })
+
+                if (passwordError) {
+                    setUpdateError(passwordError.message);
+                    return;
+                }
             }
 
             setUpdateSuccess(true);
+
         } catch (error) {
             console.error('Error updating user credentials:', error.message);
             setUpdateError('An error occurred while updating user credentials.');
@@ -87,7 +89,7 @@ function Settings() {
 
     return (
         <>
-            <div className="bg-beige" style={{ height: "400px" }}>
+            <div className="bg-beige">
                 <hr />
                 <Tab.Container defaultActiveKey='#general'>
                     <Row className="w-75 mx-auto overflow-y-auto">
@@ -134,14 +136,16 @@ function Settings() {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label className="block">Phone</label>
-                                            <input 
-                                                type="text" 
-                                                name="newPhone"
-                                                placeHolder=""
-                                                className="form-control mb-2" 
-                                                value={newPhone}
-                                                onChange={(e) => setNewPhone(e.target.value)}
+                                            <label className="block">Description</label>
+                                            <textarea 
+                                                id="description" 
+                                                name="newDescription"
+                                                rows="2" 
+                                                className="rounded w-full py-2 px-3"
+                                                style={{ resize: 'vertical' }} 
+                                                placeholder={newDescr}
+                                                value={newDescr}
+                                                onChange={(e) => setNewDescr(e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -152,7 +156,7 @@ function Settings() {
                                         <div className="form-group">
                                             <label className="block">New Password</label>
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="newPassword"
                                                 placeholder=""
                                                 className="form-control mb-2"
@@ -163,7 +167,7 @@ function Settings() {
                                         <div className="form-group">
                                             <label className="block">Confirm Password</label>
                                             <input
-                                                type="text"
+                                                type="password"
                                                 name="confirmPassword"
                                                 placeholder=""
                                                 className="form-control mb-2"
@@ -173,15 +177,15 @@ function Settings() {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="flex justify-center items-center p-3 bg-beige">
+                                    <button className="bg-green hover:bg-brown text-white px-4 py-2 rounded-full" onClick={updateUser}>Save Changes</button>
+                                </div>
+                                {updateSuccess && <div className="text-center text-green-500 py-2">User credentials updated successfully.</div>}
+                                {updateError && <div className="text-center text-red-500 py-2">{updateError}</div>}
                             </div>
                         </Col>
                     </Row>
                 </Tab.Container>
-            </div>
-            <div className="text-center p-3 bg-beige">
-                <button className="bg-green hover:bg-brown text-white px-4 py-2 rounded-full" onClick={updateUser}>Save Changes</button>
-                {updateSuccess && <p className="text-base text-center text-green-500">User credentials updated successfully.</p>}
-                {updateError && <p className="text-base text-center text-red-500">{updateError}</p>}
             </div>
         </>
     );
