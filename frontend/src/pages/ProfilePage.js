@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import bookSearch from '../components/bookSearch';
+// import bookSearch from '../components/bookSearch';
 import ProfileHeader from '../components/ProfileHeader';
 import BookList from '../components/BookList';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +9,6 @@ import { useAppContext } from '../AppContext';
 function ProfilePage() {
   const { user, supabase, loading, setUser } = useAppContext();
   const [favoriteBooks, setFavoriteBooks] = useState([]);
-  const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [shouldFetch, setShouldFetch] = useState(true);
 
@@ -29,27 +28,29 @@ function ProfilePage() {
     try {
       // Check if a profile already exists
       const { data: existingProfile, error: fetchError } = await supabase
-        .from('profile')
+        .from('user')
         .select()
-        .eq('user_id', user.id);
+        .eq('id', user.id);
   
       if (fetchError) throw fetchError;
   
       if (existingProfile.length === 0) {
         // No profile exists, create a new one
         const { data: createData, error: createError } = await supabase
-          .from('profile')
-          .insert([{ user_id: user.id, pfpURL: newUrl }]);
+          .from('user')
+          .insert([{ id: user.id, pfpURL: newUrl }]);
         if (createError) throw createError;
         console.log('New profile created:', createData);
+        window.location.reload();
       } else {
         // Profile exists, update it
         const { data: updateData, error: updateError } = await supabase
-          .from('profile')
+          .from('user')
           .update({ pfpURL: newUrl })
-          .eq('user_id', user.id);
+          .eq('id', user.id);
         if (updateError) throw updateError;
         console.log('Profile updated successfully:', updateData);
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error managing profile:', error);
@@ -60,9 +61,9 @@ function ProfilePage() {
     try {
       setIsLoading(true);
       const { data, error } = await supabase
-        .from('profile')
+        .from('user')
         .select()
-        .eq('user_id', user.id);
+        .eq('id', user.id);
   
       if (error) throw error;
       console.log("Fetched profile data: ", data);
@@ -116,7 +117,7 @@ function ProfilePage() {
   return (
     <div>
       <bookSearch />
-      <ProfileHeader profilePicUrl={user?.profile_pic_url || 'https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg'} onUpdateProfilePicUrl={updateProfilePicUrl} />
+      <ProfileHeader profilePicUrl={user?.profile_pic_url || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1114445501.jpg'} onUpdateProfilePicUrl={updateProfilePicUrl} />
       <TopTags tags={["Fiction", "LOTR", "Harry Potter Hater"]} />
       {isLoading ? (
         <p>Loading books...</p>
