@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Card, Col, Row} from "react-bootstrap";
 import {useAppContext} from "../AppContext";
 import { useParams } from 'react-router-dom';
 
@@ -141,14 +140,14 @@ function Annotations() {
     }
 
     return (
-        <div className="bg-beige">
+        <div>
             {/* Title details */}
-            <hr/>
+            {/*<hr/>*/}
             <br/>
             <h2 className="text-center text-3xl">{title} Annotations</h2>
             <br/>
-            <hr/>
-            <br/>
+            {/*<hr/>*/}
+            {/*<br/>*/}
 
             {/* User Actions */}
             <div className="container">
@@ -194,31 +193,26 @@ function Annotations() {
             </div>
 
             <br/>
-            <hr/>
             <br/>
 
             {/* Annotations */}
             <div className="container">
-                <Row>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {annotations
                         .filter(annotation => {
                             const annotationText = annotation.text.toLowerCase();
                             return keywords.every(keyword => annotationText.includes(keyword.toLowerCase()));
                         })
                         .map(annotation => (
-                        <Col xs={12} md={6} lg={4} className="mb-4" key={annotation.id}>
-                            <Card>
-                                <Card.Body className="relative">
-                                    <Card.Subtitle className="mb-2 text-muted">Page {annotation.page_number}</Card.Subtitle>
-                                    <Card.Text>
-                                        {annotation.text}
-                                        <button  onClick={() => handleRemove(annotation.id)} className="absolute top-5 right-5 text-red-600 text-2xl">&times;</button>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+                            <div className="mb-4" key={annotation.id}>
+                                <div className="border-brown border-2 rounded-lg p-3 relative">
+                                    <p className="mb-0 text-muted">Page {annotation.page_number}</p>
+                                    <p>{annotation.text}</p>
+                                    <button onClick={() => handleRemove(annotation.id)} className="absolute top-5 right-5 text-red-600 text-2xl">&times;</button>
+                                </div>
+                            </div>
+                        ))}
+                </div>
             </div>
         </div>
     );
