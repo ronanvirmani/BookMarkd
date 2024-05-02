@@ -22,21 +22,26 @@ const Signup = () => {
           return;
         }
 
-        const {error: insertError } = await supabase
-            .from("user")
-            .insert([{ 
-              id: data.user.id, 
-              name: data.user.email, 
-              email: data.user.email, 
-              phone: ""
-        }]);
+        // console.log(data.user.id + " " + data.user.email + " ");
 
-        if (insertError) {
-            console.error(insertError.message);
-            return;
-        }
+        // const {error: insertError } = await supabase
+        //     .from("user")
+        //     .insert([{ 
+        //       id: data.user.id, 
+        //       name: data.user.email, 
+        //       email: data.user.email, 
+        //       phone: ""
+        // }]);
+
+        // if (insertError) {
+        //     console.error(insertError.message);
+        //     return;
+        // }
     
         setUser(data.user);
+
+        //console.log(data.user.id + " " + data.user.email + " ");
+
 
         // redirect to home
         navigate('/profile');

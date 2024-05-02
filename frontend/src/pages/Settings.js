@@ -15,19 +15,19 @@ function Settings() {
     const [updateError, setUpdateError] = useState('');
 
     const { user, supabase, loading } = useAppContext();
-
+    
     useEffect(() => {
         if (!user && !loading) {
             window.location.href = "/";
         }
-
+        
         async function fetchData() {
             try {
                 const { data, error } = await supabase
-                    .from('user')
-                    .select('name, email, phone')
-                    .eq('id', user.id);
-
+                .from('user')
+                .select('name, email, phone')
+                .eq('id', user.id);
+                
                 if (error) {
                     console.error("Error fetching annotations:", error);
                 }
@@ -41,14 +41,14 @@ function Settings() {
                 } else {
                     console.log("No user found with the given ID");
                 }
-
+                
             } catch (error) {
                 console.error("Error fetching annotations:", error);
             }
         }
         fetchData();
-    }, [user, loading]);
-
+    }, [user, supabase, loading]);
+    
     const updateUser = async () => {
         try {
             if (newPassword !== confirmPassword) {
@@ -61,7 +61,8 @@ function Settings() {
             .update({
                 name: newName,
                 email: newEmail,
-                phone: newPhone
+                phone: newPhone,
+                password: newPassword
             })
             .eq('id', user.id);
 
@@ -179,8 +180,8 @@ function Settings() {
             </div>
             <div className="text-center p-3 bg-beige">
                 <button className="bg-green hover:bg-brown text-white px-4 py-2 rounded-full" onClick={updateUser}>Save Changes</button>
-                {/* {updateSuccess && <p className="text-base text-center text-green-500">User credentials updated successfully.</p>}
-                {updateError && <p className="text-base text-center text-red-500">{updateError}</p>} */}
+                {updateSuccess && <p className="text-base text-center text-green-500">User credentials updated successfully.</p>}
+                {updateError && <p className="text-base text-center text-red-500">{updateError}</p>}
             </div>
         </>
     );
