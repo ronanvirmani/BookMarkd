@@ -58,10 +58,32 @@ function Annotations() {
         }
     }
 
+    async function checkUserBook() {
+        try {
+            const { data, error } = await supabase
+                .from('book_table')
+                .select()
+                .eq('id', userBookId)
+                .eq('user_id', user.id);
+            if (error) {
+                console.error("Error checking user", error);
+            } else {
+                if (data.length === 0) {
+                    window.location.href = "/"; // Redirect to home page if book does not belong to user
+                }
+            }
+        }
+        catch (error) {
+            console.error("Error checking user", error);
+        }
+    }
+
     useEffect(() => {
         if(!user && !loading){
             window.location.href = "/";
         }
+        // check userbook belongs to user
+        checkUserBook();
         fetchData();
         getTitle();
     });
