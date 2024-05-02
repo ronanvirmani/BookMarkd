@@ -77,7 +77,6 @@ function ProfileHeader({ profilePicUrl, onUpdateProfilePicUrl }) {
           {user ? <h3>{newName}</h3> : <h3>Loading...</h3>}
           <p>{newDescr}</p>
         </div>
-        ...
       </div>
     </div>
   );
