@@ -26,6 +26,7 @@ root.render(
         <Route path="/settings" element={<Settings />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/annotations/:userBookId" element={<Annotations />} />
       </Routes>
       <Footer />
     </BrowserRouter>

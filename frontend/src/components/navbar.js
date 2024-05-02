@@ -21,9 +21,9 @@ export default function Navbar() {
                         <Link to="/profile" className="text-green no-underline border-2 px-2.5 py-0.5 rounded-3 border-green hover:text-brown hover:border-brown">
                         Profile
                         </Link>
-                        <Link to="/annotations" className="text-green no-underline border-2 px-2.5 py-0.5 rounded-3 border-green hover:text-brown hover:border-brown">
-                        Annotations
-                        </Link>
+                        {/*<Link to="/annotations" className="text-green no-underline border-2 px-2.5 py-0.5 rounded-3 border-green hover:text-brown hover:border-brown">*/}
+                        {/*Annotations*/}
+                        {/*</Link>*/}
                         <Link to="/settings" className="text-green no-underline border-2 px-2.5 py-0.5 rounded-3 border-green hover:text-brown hover:border-brown">
                         Settings
                         </Link>
