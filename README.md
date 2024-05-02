@@ -28,7 +28,7 @@ Welcome to BookMark'd, the ultimate web solution for those struggling to find th
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:AntonCSalvador/BookMarkd.git
 
 2. Navigate to the frontend directory:
 
@@ -48,3 +48,5 @@ Welcome to BookMark'd, the ultimate web solution for those struggling to find th
 ### Running the Application
 Ensure that you verify your email address after creating an account. If you encounter any issues during the use, double-check that email verification has been completed successfully.
 
+### Live Version
+Visit the live deployed version of BookMark'd at book-markd.vercel.app
