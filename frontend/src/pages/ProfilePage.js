@@ -9,31 +9,76 @@ import { useAppContext } from '../AppContext';
 function ProfilePage() {
   const { user, supabase, loading, setUser } = useAppContext();
   const [favoriteBooks, setFavoriteBooks] = useState([]);
+  const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldFetch, setShouldFetch] = useState(true);
 
   useEffect(() => {
-    if (user) {
+    if (user && shouldFetch) {
+      fetchProfileData();
       fetchFavoriteBooks();
-    } else if (!loading) {
+      setShouldFetch(false); // This will ensure the data is fetched only once
+    } else if (!loading && !user) {
       window.location.href = "/";
     }
-  }, [user, loading]);
+  }, [user, loading, shouldFetch]); // Now also depends on shouldFetch
+  
 
+  
   const updateProfilePicUrl = async (newUrl) => {
     try {
-      const { data, error } = await supabase
-        .from('book_table') // Assuming your user table is named 'users'
-        .update({ pfpURL: newUrl })
+      // Check if a profile already exists
+      const { data: existingProfile, error: fetchError } = await supabase
+        .from('profile')
+        .select()
         .eq('user_id', user.id);
-
-      if (error) throw error;
-      console.log('Profile updated successfully:', newUrl);
-      setUser(current => ({ ...current, profile_pic_url: newUrl }));
-
+  
+      if (fetchError) throw fetchError;
+  
+      if (existingProfile.length === 0) {
+        // No profile exists, create a new one
+        const { data: createData, error: createError } = await supabase
+          .from('profile')
+          .insert([{ user_id: user.id, pfpURL: newUrl }]);
+        if (createError) throw createError;
+        console.log('New profile created:', createData);
+      } else {
+        // Profile exists, update it
+        const { data: updateData, error: updateError } = await supabase
+          .from('profile')
+          .update({ pfpURL: newUrl })
+          .eq('user_id', user.id);
+        if (updateError) throw updateError;
+        console.log('Profile updated successfully:', updateData);
+      }
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error('Error managing profile:', error);
     }
   };
+  
+  const fetchProfileData = async() => {
+    try {
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('profile')
+        .select()
+        .eq('user_id', user.id);
+  
+      if (error) throw error;
+      console.log("Fetched profile data: ", data);
+  
+      if (data.length > 0) {
+        const profileUrl = data[0].pfpURL; // Assume the first record is the correct one
+        setUser(current => ({ ...current, profile_pic_url: profileUrl }));
+      }
+  
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
 
   const fetchFavoriteBooks = async () => {
     try {
