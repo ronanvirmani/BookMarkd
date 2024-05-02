@@ -21,8 +21,26 @@ const Signup = () => {
           console.log(error);
           return;
         }
+
+        const user_name = data.user.email;
+
+        const {error: insertError } = await supabase
+            .from("user")
+            .insert([{ 
+              id: data.user.id, 
+              name: user_name, 
+              email: data.user.email 
+        }]);
+
+        if (insertError) {
+            console.error(insertError.message);
+            return;
+        }
     
         setUser(data.user);
+
+        //console.log(data.user.id + " " + data.user.email + " ");
+
 
         // redirect to home
         navigate('/profile');

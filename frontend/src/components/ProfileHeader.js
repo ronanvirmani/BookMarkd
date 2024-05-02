@@ -3,8 +3,10 @@ import { useAppContext } from '../AppContext';
 
 
 function ProfileHeader({ profilePicUrl, onUpdateProfilePicUrl }) {
-  const { user } = useAppContext(); // Destructure user from the context
+  const { user, supabase } = useAppContext(); // Destructure user from the context
   const [newUrl, setNewUrl] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newDescr, setNewDescr] = useState('');
   const [editMode, setEditMode] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -12,6 +14,32 @@ function ProfileHeader({ profilePicUrl, onUpdateProfilePicUrl }) {
     await onUpdateProfilePicUrl(newUrl);
     setEditMode(false); // Exit edit mode after submission
   };
+
+  async function fetchData() {
+    try {
+        const { data, error } = await supabase
+        .from('user')
+        .select('name, description')
+        .eq('id', user.id);
+        
+        if (error) {
+            console.error("Error fetching annotations:", error);
+        }
+
+        if (data && data.length > 0) {
+            const userData = data[0];
+            console.log("User data:", userData);
+            setNewName(userData.name || '');
+            setNewDescr(userData.description || '');
+        } else {
+            console.log("No user found with the given ID");
+        }
+        
+    } catch (error) {
+        console.error("Error fetching annotations:", error);
+    }
+  }
+  fetchData();
 
   const headerStyle = {
     backgroundColor: '#FFD700', // Gold
@@ -46,8 +74,8 @@ function ProfileHeader({ profilePicUrl, onUpdateProfilePicUrl }) {
               <button type="submit">Update</button>
             </form>
           )}
-          {user ? <h3>{user.email}</h3> : <h3>Loading...</h3>}
-          <p>description right here</p>
+          {user ? <h3>{newName}</h3> : <h3>Loading...</h3>}
+          <p>{newDescr}</p>
         </div>
         ...
       </div>
