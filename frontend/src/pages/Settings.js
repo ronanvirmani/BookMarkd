@@ -89,15 +89,14 @@ function Settings() {
 
     return (
         <>
-            <div className="bg-beige">
-                <hr />
+            <div className="p-4">
                 <Tab.Container defaultActiveKey='#general'>
                     <Row className="w-75 mx-auto overflow-y-auto">
                         <Col md={3} className="pt-0">
                             <h4 className="font-weight-bold pb-4">
                                 Account Settings
                             </h4>
-                            <div className="bg-beige">
+                            <div>
                                 <div id="general" className={`rounded ${selected === "#general" ? "bg-green text-white" : "text-brown"} hover:bg-brown hover:text-white p-2 w-64 mb-2`} onClick={() => setSelected('#general')}>
                                     <a href="#general" className="hidden">General</a>
                                     General
@@ -141,7 +140,7 @@ function Settings() {
                                                 id="description" 
                                                 name="newDescription"
                                                 rows="2" 
-                                                className="rounded w-full py-2 px-3"
+                                                className="rounded w-full py-2 px-3 border"
                                                 style={{ resize: 'vertical' }} 
                                                 placeholder={newDescr}
                                                 value={newDescr}
@@ -177,7 +176,7 @@ function Settings() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex justify-center items-center p-3 bg-beige">
+                                <div className="flex justify-center items-center p-3">
                                     <button className="bg-green hover:bg-brown text-white px-4 py-2 rounded-full" onClick={updateUser}>Save Changes</button>
                                 </div>
                                 {updateSuccess && <div className="text-center text-green-500 py-2">User credentials updated successfully.</div>}
